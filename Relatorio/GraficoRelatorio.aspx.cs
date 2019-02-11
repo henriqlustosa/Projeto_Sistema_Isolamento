@@ -240,7 +240,7 @@ public partial class Relatorio_GraficoRelatorio : System.Web.UI.Page
         "SUM(CASE WHEN idade BETWEEN 60 AND 69 THEN 1 ELSE 0 END) AS [50-59], " +
         "SUM(CASE WHEN idade BETWEEN 60 AND 69 THEN 1 ELSE 0 END) AS [60-69], " +
         "SUM(CASE WHEN idade BETWEEN 70 AND 79 THEN 1 ELSE 0 END) AS [70-79], " +
-        "SUM(CASE WHEN idade >79 THEN 1 ELSE 0 END) AS [80- +]  FROM (SELECT e.[rh],[nome],convert ( int ,DATEDIFF(d, dt_nasc, getdate())/365.25) as idade,[sexo],[obito] " +
+        "SUM(CASE WHEN idade >79 THEN 1 ELSE 0 END) AS [80- +]  FROM (SELECT distinct e.[rh],[nome],convert ( int ,DATEDIFF(d, dt_nasc, getdate())/365.25) as idade,[sexo],[obito] " +
       "FROM [Isolamento].[dbo].[Paciente]as p inner join [Isolamento].[dbo].[Exame] as e on e.rh = p.rh  " +
  "inner join [Isolamento].[dbo].[tipos_microorganismos] as m on e.microorganismo = m.cod_microorg " +
                 "where obito = 0 AND (YEAR(e.dt_resultado) * 100 + MONTH(e.dt_resultado)) >=  " + anoMesInicial +
