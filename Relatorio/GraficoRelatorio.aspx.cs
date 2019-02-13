@@ -124,7 +124,7 @@ public partial class Relatorio_GraficoRelatorio : System.Web.UI.Page
         "SUM(CASE WHEN idade BETWEEN 20 AND 29 THEN 1 ELSE 0 END) AS [20-29], " +
         "SUM(CASE WHEN idade BETWEEN 30 AND 39 THEN 1 ELSE 0 END) AS [30-39], " +
         "SUM(CASE WHEN idade BETWEEN 40 AND 49 THEN 1 ELSE 0 END) AS [40-49], " +
-        "SUM(CASE WHEN idade BETWEEN 60 AND 69 THEN 1 ELSE 0 END) AS [50-59], " +
+        "SUM(CASE WHEN idade BETWEEN 50 AND 59 THEN 1 ELSE 0 END) AS [50-59], " +
         "SUM(CASE WHEN idade BETWEEN 60 AND 69 THEN 1 ELSE 0 END) AS [60-69], " +
         "SUM(CASE WHEN idade BETWEEN 70 AND 79 THEN 1 ELSE 0 END) AS [70-79], " +
         "SUM(CASE WHEN idade >79 THEN 1 ELSE 0 END) AS [80- +]  FROM (SELECT distinct e.[rh],[nome],convert ( int ,DATEDIFF(d, dt_nasc, getdate())/365.25) as idade,[sexo],[obito] " +
@@ -175,7 +175,7 @@ public partial class Relatorio_GraficoRelatorio : System.Web.UI.Page
         "SUM(CASE WHEN idade BETWEEN 20 AND 29 THEN 1 ELSE 0 END) AS [20-29], " +
         "SUM(CASE WHEN idade BETWEEN 30 AND 39 THEN 1 ELSE 0 END) AS [30-39], " +
         "SUM(CASE WHEN idade BETWEEN 40 AND 49 THEN 1 ELSE 0 END) AS [40-49], " +
-        "SUM(CASE WHEN idade BETWEEN 60 AND 69 THEN 1 ELSE 0 END) AS [50-59], " +
+        "SUM(CASE WHEN idade BETWEEN 50 AND 59 THEN 1 ELSE 0 END) AS [50-59], " +
         "SUM(CASE WHEN idade BETWEEN 60 AND 69 THEN 1 ELSE 0 END) AS [60-69], " +
         "SUM(CASE WHEN idade BETWEEN 70 AND 79 THEN 1 ELSE 0 END) AS [70-79], " +
         "SUM(CASE WHEN idade >79 THEN 1 ELSE 0 END) AS [80- +]  FROM (SELECT distinct e.[rh],[nome],convert ( int ,DATEDIFF(d, dt_nasc, getdate())/365.25) as idade,[sexo],[obito] " +
@@ -216,6 +216,8 @@ public partial class Relatorio_GraficoRelatorio : System.Web.UI.Page
 
             }
             ChartIdadeObito.Visible = true;
+            ChartIdadeObito.Series["Morto"].IsValueShownAsLabel = true;
+            ChartIdadeObito.Series["Vivo"].IsValueShownAsLabel = true;
 
         }
         catch (Exception ex)
@@ -237,7 +239,7 @@ public partial class Relatorio_GraficoRelatorio : System.Web.UI.Page
         "SUM(CASE WHEN idade BETWEEN 20 AND 29 THEN 1 ELSE 0 END) AS [20-29], " +
         "SUM(CASE WHEN idade BETWEEN 30 AND 39 THEN 1 ELSE 0 END) AS [30-39], " +
         "SUM(CASE WHEN idade BETWEEN 40 AND 49 THEN 1 ELSE 0 END) AS [40-49], " +
-        "SUM(CASE WHEN idade BETWEEN 60 AND 69 THEN 1 ELSE 0 END) AS [50-59], " +
+        "SUM(CASE WHEN idade BETWEEN 50 AND 59 THEN 1 ELSE 0 END) AS [50-59], " +
         "SUM(CASE WHEN idade BETWEEN 60 AND 69 THEN 1 ELSE 0 END) AS [60-69], " +
         "SUM(CASE WHEN idade BETWEEN 70 AND 79 THEN 1 ELSE 0 END) AS [70-79], " +
         "SUM(CASE WHEN idade >79 THEN 1 ELSE 0 END) AS [80- +]  FROM (SELECT distinct e.[rh],[nome],convert ( int ,DATEDIFF(d, dt_nasc, getdate())/365.25) as idade,[sexo],[obito] " +
@@ -246,7 +248,7 @@ public partial class Relatorio_GraficoRelatorio : System.Web.UI.Page
                 "where obito = 0 AND (YEAR(e.dt_resultado) * 100 + MONTH(e.dt_resultado)) >=  " + anoMesInicial +
           "AND (YEAR(e.dt_resultado) * 100 + MONTH(e.dt_resultado)) <= " + anoMesFinal+
   "Union " +
-  "SELECT e.[rh],[nome],DATEDIFF(yy, dt_nasc, dtobito) as idade,[sexo],[obito] " +
+  "SELECT distinct e.[rh],[nome],DATEDIFF(yy, dt_nasc, dtobito) as idade,[sexo],[obito] " +
   "FROM [Isolamento].[dbo].[Paciente] as p inner join [Isolamento].[dbo].[Exame] as e on e.rh = p.rh " +
  "inner join [Isolamento].[dbo].[tipos_microorganismos] as m on e.microorganismo = m.cod_microorg " +
     "where obito =1 AND (YEAR(e.dt_resultado) * 100 + MONTH(e.dt_resultado)) >= " + anoMesInicial  + 
@@ -321,6 +323,8 @@ public partial class Relatorio_GraficoRelatorio : System.Web.UI.Page
                 ChartGrupoMateriais.Series["Vivo"].YValueMembers = "VIVO";
                 ChartGrupoMateriais.Series["Morto"].YValueMembers = "MORTO";
                 ChartGrupoMateriais.Visible = true;
+                ChartGrupoMateriais.Series["Morto"].IsValueShownAsLabel = true;
+                ChartGrupoMateriais.Series["Vivo"].IsValueShownAsLabel = true;
 
 
             }
@@ -413,6 +417,8 @@ public partial class Relatorio_GraficoRelatorio : System.Web.UI.Page
                 ChartMicrorganismo.Visible = true;
 
                 ChartMicrorganismo.ChartAreas[0].AxisX.Interval = 1;
+                ChartMicrorganismo.Series["Morto"].IsValueShownAsLabel = true;
+                ChartMicrorganismo.Series["Vivo"].IsValueShownAsLabel = true;
             }
         }
         catch (Exception ex)

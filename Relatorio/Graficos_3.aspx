@@ -20,7 +20,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
 <h1 align="center" style="width: 877px">
-        Gráfico dos Pacientes
+        Gráfico de Exames Positivados
         <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
         </asp:ToolkitScriptManager>
     </h1>
