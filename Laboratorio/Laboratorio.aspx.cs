@@ -23,13 +23,13 @@ public partial class Laboratorio_Laboratorio : System.Web.UI.Page
     }
     protected void btnGravar_Click(object sender, EventArgs e)
     {
-        if (lbNomePreenchido.Text == "") // your condition
+        /*if (txbNome.Text == "") // your condition
         {
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Atenção! Digite o RH e clique no botão [Pesquisar] para aparecer o nome do Paciente.');", true);
             txbRH.Text = "";
         }
         else
-        {
+        {*/
             RequiredFieldValidator1.Enabled = false;
 
             //tabela Exame
@@ -38,16 +38,16 @@ public partial class Laboratorio_Laboratorio : System.Web.UI.Page
             string codMaterial = ddlMaterial.SelectedValue;
 
             string rh = txbRH.Text;
-            string clinica = lbClinicaPreenchido.Text;
+            string clinica = ddlClinica.SelectedValue;
             string contato = txbContato.Text;
             DateTime dt_cadastro = DateTime.Now;
             DateTime dt_ultima_atualizacao = DateTime.Now;
             string usuario = lbUser.Text;
 
             //tabela paciente
-            string nomePaciente = lbNomePreenchido.Text;
-            string dt_nascimento = "";
-            char sexo;
+            //string nomePaciente = txbNome.Text;
+            //string dt_nascimento = "";
+            //char sexo;
 
             //insert paciente
             using (SqlConnection cnn4 = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringIsolamento"].ToString()))
@@ -63,8 +63,9 @@ public partial class Laboratorio_Laboratorio : System.Web.UI.Page
                     dr4.Close();
                 }
                 else
+                
                 {
-                    using (OdbcConnection cnn = new OdbcConnection(ConfigurationManager.ConnectionStrings["HospubConn"].ToString()))
+                   /* using (OdbcConnection cnn = new OdbcConnection(ConfigurationManager.ConnectionStrings["HospubConn"].ToString()))
                     {
                         OdbcCommand cmm = cnn.CreateCommand();
                         cmm.CommandText = "select ib6regist, concat(ib6pnome,ib6compos) as nome , ib6dtnasc,ib6sexo from intb6  where ib6regist =" + rh;
@@ -76,10 +77,10 @@ public partial class Laboratorio_Laboratorio : System.Web.UI.Page
                             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('Número de RH não existe" + rh + "!);", true);
                             dr1.Close();
 
-                        }
-                        else
-                        {
-                            string rh2 = dr1.GetDecimal(0).ToString();
+                        }*/
+                       // else
+                        //{
+                          /*  string rh2 = dr1.GetDecimal(0).ToString();
                             string nomeCompleto = dr1.GetString(1);
                             dt_nascimento = dr1.GetString(2);
                             sexo = dr1.GetChar(3);
@@ -120,12 +121,12 @@ public partial class Laboratorio_Laboratorio : System.Web.UI.Page
                                 }//if
 
 
-                            }//using
+                            }//using */
 
 
-                        }//else
+                       // }//else*/
 
-                    }//using
+                   // }//using
 
 
 
@@ -154,6 +155,7 @@ public partial class Laboratorio_Laboratorio : System.Web.UI.Page
                         catch (Exception ex)
                         {
                             string err = ex.Message;
+                            return;
                             
                         }
                     }//using
@@ -162,11 +164,11 @@ public partial class Laboratorio_Laboratorio : System.Web.UI.Page
                 }//else
             }
 
-        }//else do required control
+        //}//else do required control
     }
-    protected void Pesquisar_Click(object sender, EventArgs e)
+    /*protected void Pesquisar_Click(object sender, EventArgs e)
     {
-       using (OdbcConnection cnn = new OdbcConnection(ConfigurationManager.ConnectionStrings["HospubConn"].ToString()))
+       /*using (OdbcConnection cnn = new OdbcConnection(ConfigurationManager.ConnectionStrings["HospubConn"].ToString()))
         {
             try
             {
@@ -216,13 +218,13 @@ public partial class Laboratorio_Laboratorio : System.Web.UI.Page
             {
                 String erro = ex.Message;
             }
-        }
+        }*/
    
-    }
+    //}
     public void LimpaCampos()
     {
-        lbNomePreenchido.Text = "";
-        lbClinicaPreenchido.Text = "";
+        //txbNome.Text = "";
+        ddlClinica.SelectedIndex = 0;
       
          
         ddlMicroorganismo.SelectedIndex = 0;

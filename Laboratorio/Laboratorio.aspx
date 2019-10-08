@@ -36,6 +36,15 @@
         {
             width: 348px;
         }
+        .style8
+        {
+            height: 30px;
+        }
+        .style9
+        {
+            width: 348px;
+            height: 30px;
+        }
     </style>
 
     
@@ -53,34 +62,33 @@
  
     <table align="center">
         <tr>
-            <td >
+            <td class="style8" >
                 <asp:Label ID="lbRH"  runat="server" Text="Registro Hospitalar:" ></asp:Label>
             </td>
-            <td class="style7">
+            <td class="style9">
                 <asp:TextBox onkeypress="return isNumberKey(event)" ID="txbRH" class="campoAndar" runat="server"></asp:TextBox>
                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txbRH"
                     ErrorMessage="O campo [Registro Hospitalar] não foi preenchido." ValidationGroup="cadastro"
                     >*</asp:RequiredFieldValidator>
               </td>
-              <td>
-                <asp:Button ID="Pesquisar" runat="server" Text="Pesquisar" 
+              <!--td class="style8">
+                asp:Button ID="Pesquisar" runat="server" Text="Pesquisar" 
                       onclick="Pesquisar_Click" />
               
-            </td>
+            </td>-->
             
             
         </tr>
-        <tr>
+        <!--<tr>
             <td >
                 <asp:Label ID="lbNome" runat="server" Text="Nome:"></asp:Label>
                 
             </td>
-            <td class="style7" >
-                <asp:Label ID="lbNomePreenchido" class="campoNome" runat="server" Text=""></asp:Label>
-               
-            </td>
+            <td class="style7">
+                <asp:TextBox ID="txbNome" class="campoNome" runat="server" Width="423px"></asp:TextBox>
+           
           
-        </tr>
+        </tr>-->
         
             <tr>
                 <td >
@@ -121,7 +129,15 @@
                     <asp:Label ID="lbClinica" runat="server" Text="Clínica:"></asp:Label>
                 </td>
                 <td class="style7" >
-                     <asp:Label ID="lbClinicaPreenchido" runat="server" Text=""></asp:Label>
+                      <asp:DropDownList ID="ddlClinica" runat="server" 
+                         DataSourceID="SqlDataSource3" DataTextField="Clinica" 
+                         DataValueField="Clinica" Height="25px" Width="255px">
+                     </asp:DropDownList>
+                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
+                         ConnectionString="<%$ ConnectionStrings:ConnectionStringIsolamento %>" 
+                         ProviderName="<%$ ConnectionStrings:ConnectionStringIsolamento.ProviderName %>" 
+                         SelectCommand="SELECT [Clinica] FROM [Clinica] order by Clinica">
+                     </asp:SqlDataSource>
                 </td>
              </tr>
              <tr>
